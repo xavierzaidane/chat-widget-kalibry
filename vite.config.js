@@ -6,8 +6,11 @@ export default defineConfig({
   plugins: [react()],
   resolve: {
     alias: {
-      "@": path.resolve(__dirname, "./app"), 
+      "@": path.resolve(__dirname, "./app"),
     },
+  },
+  define: {
+    'process.env': {} 
   },
   build: {
     outDir: "dist",
@@ -19,7 +22,7 @@ export default defineConfig({
     },
     rollupOptions: {
       output: {
-        assetFileNames: "chat-widget.css", 
+        assetFileNames: "chat-widget.css",
       },
     },
   },
