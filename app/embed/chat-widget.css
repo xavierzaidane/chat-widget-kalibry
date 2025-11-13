@@ -29,7 +29,7 @@
 
   /* Header icon container */
   .chat-header-icon {
-    @apply flex items-center justify-center h-9 w-9 rounded-lg bg-zinc-100;
+    @apply flex items-center justify-center h-9 w-9 rounded-lg ;
   }
 
   /* Header text content */

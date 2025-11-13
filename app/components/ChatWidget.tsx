@@ -8,6 +8,7 @@ import { MorphingPopover, MorphingPopoverContent, MorphingPopoverTrigger } from 
 interface Message {
   role: 'user' | 'bot';
   text: string;
+  meta?: string;
 }
 
 export function ChatWidget() {
@@ -15,7 +16,12 @@ export function ChatWidget() {
   const [open, setOpen] = useState(false);
   const [input, setInput] = useState('');
   const [messages, setMessages] = useState<Message[]>([
-    { role: 'bot', text: 'Hi there 👋\nHow can I assist you today?' }
+    {
+      role: 'bot',
+      text:
+        "Hello 👋 I'm Kalibry Assistant. I can help with product information, troubleshooting, or store setup. " +
+        "Tell me briefly what you need and I'll provide a clear, actionable response."
+    }
   ]);
   const [botTyping, setBotTyping] = useState(false);
 
@@ -43,19 +49,23 @@ export function ChatWidget() {
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
 
-    // simulate bot typing with smooth delay
+    // simulate bot typing with thoughtful delay
     setBotTyping(true);
+
     const botReply: Message = {
       role: 'bot',
       text:
-        'Thank you for your message! Our support team will get back to you shortly.\n\n' +
-        'If your inquiry is urgent, please mention it and we\'ll prioritize it.'
+        "Thanks — I’ve received your question. Here’s a concise, professional response:\n\n" +
+        "• Summary: I'll address the key points first.\n" +
+        "• Steps: If applicable, I’ll provide step-by-step instructions.\n" +
+        "• Next actions: Suggestions & follow-ups.\n\n" +
+        "If you share the exact details (URLs, error messages, or screenshots), I can provide a more precise solution."
     };
 
     setTimeout(() => {
       setMessages((prev) => [...prev, botReply]);
       setBotTyping(false);
-    }, 800);
+    }, 900);
   };
 
   return (
@@ -65,19 +75,28 @@ export function ChatWidget() {
         open={open}
         onOpenChange={setOpen}
       >
-        {/* Floating Launcher */}
-        <MorphingPopoverTrigger
-          className="chat-launcher flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-tr from-zinc-700 to-zinc-900 text-white shadow-sm hover:scale-105 active:scale-95 transition-transform ring-1 ring-transparent hover:ring-zinc-300"
+        {/* Floating Launcher - neutral GPT-like style */}
+                <MorphingPopoverTrigger
+          className="chat-launcher flex h-16 w-16 items-center justify-center rounded-full bg-gradient-to-br from-slate-900 to-slate-800 text-white shadow-lg hover:scale-105 active:scale-97 transition-transform ring-1 ring-slate-800/20 focus:outline-none focus-visible:ring-2 focus-visible:ring-slate-300/30"
           aria-label="Open chat"
+          title="Open Kalibry Assistant"
         >
-          <motion.span layoutId={`label-${id}`}>
-            <BotMessageSquare size={24} />
+          <motion.span
+            layoutId={`label-${id}`}
+            className="flex items-center justify-center"
+            whileHover={{ scale: 1.06 }}
+            whileTap={{ scale: 0.96 }}
+          >
+            <div>
+              <BotMessageSquare size={30} className="text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]" />
+            </div>
+            <span className="sr-only">Open Kalibry Assistant</span>
           </motion.span>
         </MorphingPopoverTrigger>
 
         {/* Chat Popup */}
         <MorphingPopoverContent
-          className="chat-popup fixed bottom-24 right-6 w-[520px] max-w-[92vw] h-[680px] max-h-[86vh] rounded-2xl bg-zinc-50 shadow-md border border-zinc-200 flex flex-col overflow-hidden z-[999999]"
+          className="chat-popup fixed bottom-24 right-6 w-[560px] max-w-[92vw] h-[720px] max-h-[86vh] rounded-2xl bg-white shadow-sm border border-zinc-200 flex flex-col overflow-hidden z-[999999] text-sm font-sans"
           aria-label="Customer support chat"
         >
           <motion.div
@@ -88,57 +107,71 @@ export function ChatWidget() {
             className="flex flex-col h-full"
           >
             {/* Header */}
-            <div className="chat-header px-5 py-3 flex items-center justify-between border-b border-zinc-200 bg-zinc-50">
+            <div className="chat-header px-5 py-3 flex items-center justify-between border-b border-zinc-100 bg-white rounded-t-2xl">
               <div className="chat-header-brand flex items-center gap-3">
-                <div className="chat-header-icon flex items-center justify-center h-9 w-9 rounded-lg bg-zinc-100">
-                  <Sparkles className="text-zinc-800" size={18} />
+                <div className="chat-header-icon flex items-center justify-center h-9 w-9">
+                  <Sparkles className="text-gray-700" size={18} />
                 </div>
                 <div>
-                  <div className="chat-header-title text-sm font-semibold text-zinc-900">Kalibry Chat</div>
-                  <div className="chat-header-subtitle text-xs text-zinc-500">Typically replies within a few minutes</div>
+                  <div className="chat-header-title text-sm font-semibold text-slate-900">Kalibry Assistant</div>
+                  <div className="chat-header-subtitle text-xs text-slate-500">Typically replies within a few minutes</div>
                 </div>
               </div>
 
               <div className="chat-header-actions flex items-center gap-2">
                 <button
                   onClick={() => setOpen(false)}
-                  className="p-2 rounded-lg hover:bg-zinc-100 transition-colors"
+                  className="p-2 rounded-md hover:bg-zinc-50 transition-colors"
                   aria-label="Minimize chat"
                   title="Minimize"
                 >
-                  <ArrowLeft size={18} className="text-zinc-600" />
                 </button>
 
                 <button
                   onClick={closePopup}
-                  className="p-2 rounded-lg hover:bg-zinc-100 transition-colors"
+                  className="p-2 rounded-md hover:bg-zinc-50 transition-colors"
                   aria-label="Close chat"
                   title="Close"
                 >
-                  <X size={18} className="text-zinc-600" />
+                  <X size={18} className="text-slate-600" />
                 </button>
               </div>
             </div>
 
             {/* Messages container */}
-            <div className="chat-messages-container flex-1 overflow-y-auto px-4 py-4 bg-transparent">
+            <div className="chat-messages-container flex-1 overflow-y-auto px-5 py-5 bg-transparent">
               {messages.map((m, i) => (
                 <motion.div
                   key={i}
                   initial={{ opacity: 0, y: 6 }}
                   animate={{ opacity: 1, y: 0 }}
-                  transition={{ duration: 0.22, delay: i * 0.03 }}
-                  className={`chat-message-wrapper flex mb-3 ${m.role === 'user' ? 'chat-message-user justify-end' : 'chat-message-bot justify-start'}`}
+                  transition={{ duration: 0.22, delay: i * 0.02 }}
+                  className={`chat-message-wrapper flex mb-4 ${m.role === 'user' ? 'chat-message-user justify-end' : 'chat-message-bot justify-start'}`}
                 >
+                  {m.role === 'bot' && (
+                    <div className="chat-avatar mr-3 flex-shrink-0 flex items-start">
+                      <div className="h-8 w-8 rounded-md bg-slate-100 flex items-center justify-center">
+                        <BotMessageSquare className="text-slate-700" size={16} />
+                      </div>
+                    </div>
+                  )}
+
                   <div
-                    className={`chat-message-bubble max-w-[78%] px-4 py-2 rounded-2xl text-sm whitespace-pre-line ${
+                    className={`chat-message-bubble max-w-[78%] px-4 py-3 rounded-2xl ${
                       m.role === 'user'
-                        ? 'chat-message-user-bubble bg-gray-700 text-white rounded-br-none'
-                        : 'chat-message-bot-bubble bg-white border border-zinc-200 text-zinc-800 rounded-bl-none'
+                        ? 'bg-gray-700 text-white rounded-br-2xl rounded-tl-2xl rounded-tr-md rounded-bl-2xl'
+                        : 'bg-slate-50 border border-zinc-100 text-slate-900 rounded-bl-2xl rounded-tr-2xl rounded-tl-md rounded-br-2xl'
                     }`}
-                    style={{ boxShadow: m.role === 'user' ? '0 8px 24px rgba(15,23,42,0.08)' : undefined }}
+                    style={{ boxShadow: m.role === 'user' ? '0 10px 30px rgba(15,23,42,0.12)' : undefined }}
                   >
-                    {m.text}
+                    {/* Optional role label for bot messages */}
+                    {m.role === 'bot' && (
+                      <div className="text-xs font-medium text-slate-500 mb-1">Assistant</div>
+                    )}
+
+                    <div className="whitespace-pre-line leading-6">
+                      {m.text}
+                    </div>
                   </div>
                 </motion.div>
               ))}
@@ -150,16 +183,16 @@ export function ChatWidget() {
                     initial={{ opacity: 0, y: 6 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.2 }}
-                    className="flex items-center gap-2"
+                    className="flex items-center gap-3"
                   >
-                    <div className="chat-typing-avatar h-9 w-9 rounded-full bg-zinc-100 flex items-center justify-center">
-                      <BotMessageSquare className="text-zinc-800" size={14} />
+                    <div className="chat-typing-avatar h-8 w-8 rounded-md bg-slate-100 flex items-center justify-center">
+                      <BotMessageSquare className="text-slate-700" size={14} />
                     </div>
-                    <div className="chat-typing-bubble bg-white border border-zinc-200 px-3 py-2 rounded-2xl text-sm">
+                    <div className="chat-typing-bubble bg-slate-50 border border-zinc-100 px-3 py-2 rounded-2xl text-sm">
                       <div className="chat-typing-dots flex gap-1 items-end">
-                        <span className="chat-typing-dot animate-typing-dot-1 h-2 w-2 bg-zinc-600 rounded-full animate-[blink_1.4s_infinite] inline-block" />
-                        <span className="chat-typing-dot animate-typing-dot-2 h-2 w-2 bg-zinc-600 rounded-full animate-[blink_1.4s_0.2s_infinite] inline-block" />
-                        <span className="chat-typing-dot animate-typing-dot-3 h-2 w-2 bg-zinc-600 rounded-full animate-[blink_1.4s_0.4s_infinite] inline-block" />
+                        <span className="h-2 w-2 bg-slate-600 rounded-full animate-[blink_1.2s_infinite]" style={{ animationDelay: '0s' }} />
+                        <span className="h-2 w-2 bg-slate-600 rounded-full animate-[blink_1.2s_infinite]" style={{ animationDelay: '0.15s' }} />
+                        <span className="h-2 w-2 bg-slate-600 rounded-full animate-[blink_1.2s_infinite]" style={{ animationDelay: '0.3s' }} />
                       </div>
                     </div>
                   </motion.div>
@@ -170,31 +203,45 @@ export function ChatWidget() {
             </div>
 
             {/* Input area */}
-            <div className="chat-input-area p-3 border-t border-zinc-200 bg-zinc-50">
-              <div className="chat-input-container flex items-center gap-2">
-                <input
-                  ref={inputRef}
-                  value={input}
-                  onChange={(e) => setInput(e.target.value)}
-                  onKeyDown={(e) => e.key === 'Enter' && sendMessage()}
-                  placeholder="Ask a question or describe your issue..."
-                  className="chat-input-field flex-1 px-4 py-2 text-sm rounded-xl border border-zinc-200 bg-white focus:outline-none focus:ring-2 focus:ring-zinc-200 transition-shadow shadow-sm"
-                  aria-label="Message input"
-                />
-
-                <button
-                  onClick={sendMessage}
-                  disabled={!input.trim()}
-                  className={`chat-send-button p-2 rounded-lg flex items-center justify-center transition-all ${
-                    input.trim() 
-                      ? 'chat-send-button-enabled bg-zinc-900 hover:bg-zinc-800 text-white' 
-                      : 'chat-send-button-disabled bg-zinc-100 text-zinc-400 cursor-not-allowed'
-                  }`}
-                  aria-label="Send message"
-                  title="Send"
+            <div className="chat-input-area px-4 pb-5 pt-5 bg-white">
+              <div className="max-w-3xl mx-auto">
+                <form
+                  onSubmit={(e) => {
+                    e.preventDefault();
+                    sendMessage();
+                  }}
+                  className="relative flex items-center"
+                  aria-label="Chat input form"
                 >
-                  <Send size={16} />
-                </button>
+                  {/* Main input container */}
+                  <div className="flex-1 relative">
+                    <input
+                      ref={inputRef}
+                      value={input}
+                      onChange={(e) => setInput(e.target.value)}
+                      placeholder="Message Kalibry"
+                      className="h-12 w-130 pr-12 pl-4 py-3 text-sm text-slate-900 placeholder:text-slate-500 bg-slate-100 border border-zinc-200 rounded-4xl outline-none transition-all focus:border-zinc-400 focus:shadow-md"
+                      aria-label="Message input"
+                    />
+                    
+                    {/* Send button positioned inside the input */}
+                    <div className="absolute right-1 top-1/2 transform -translate-y-1/2">
+                      <button
+                        type="submit"
+                        disabled={!input.trim()}
+                        className={`h-10 w-10 flex items-center justify-center rounded-full transition-all ${
+                          input.trim()
+                            ? 'bg-black hover:bg-gray-800 text-white shadow-sm'
+                            : 'bg-gray-600 text-gray-200 cursor-not-allowed'
+                        }`}
+                        aria-label="Send message"
+                        title="Send"
+                      >
+                        <Send size={19} />
+                      </button>
+                    </div>
+                  </div>
+                </form>
               </div>
             </div>
           </motion.div>
@@ -203,3 +250,6 @@ export function ChatWidget() {
     </div>
   );
 }
+
+
+
