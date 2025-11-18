@@ -1,5 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
+import "./chat-widget.css";
 import { ChatWidget } from "../components/ChatWidget";
 
 (function () {
@@ -12,10 +13,6 @@ import { ChatWidget } from "../components/ChatWidget";
     document.body.appendChild(rootDiv);
   }
 
-  const shadow = rootDiv.attachShadow({ mode: "open" });
-  const wrapper = document.createElement("div");
-  shadow.appendChild(wrapper);
-
-  const root = createRoot(wrapper);
+  const root = createRoot(rootDiv);
   root.render(<ChatWidget />);
 })();
