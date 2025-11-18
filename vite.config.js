@@ -10,20 +10,34 @@ export default defineConfig({
     },
   },
   define: {
-    'process.env': {} 
+    "process.env": {},
   },
   build: {
     outDir: "dist",
     lib: {
       entry: "./app/embed/page.tsx",
-      name: "ChatWidget",
-      fileName: "chat-widget",
-      formats: ["es", "umd"],
+      name: "KalibryChat",
+      fileName: (format) => `kalibry-chat-widget.${format}.js`,
+      formats: ["umd"],
     },
     rollupOptions: {
       output: {
-        assetFileNames: "chat-widget.css",
+        inlineDynamicImports: true,
+        format: "umd",
+        name: "KalibryChat",
+        globals: {
+          react: "React",
+          "react-dom": "ReactDOM",
+        },
+        // Inline all CSS and assets
+        assetFileNames: () => "[name][extname]",
       },
+      external: [],
     },
+    minify: "terser",
+    target: "es2020",
+  },
+  css: {
+    postcss: "./postcss.config.mjs",
   },
 });
