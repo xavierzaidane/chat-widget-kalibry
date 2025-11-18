@@ -1,7 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import "./chat-widget.css"; 
 import { ChatWidget } from "../components/ChatWidget";
+import cssText from "./chat-widget.css?raw";
 
 (function () {
   const rootId = "kalibry-chat-widget-root";
@@ -22,7 +22,7 @@ import { ChatWidget } from "../components/ChatWidget";
   
   // Inject styles into shadow DOM
   const style = document.createElement('style');
-  style.textContent = require('./chat-widget.css?raw');
+  style.textContent = cssText;
   shadow.appendChild(style);
 
   const root = createRoot(wrapper);

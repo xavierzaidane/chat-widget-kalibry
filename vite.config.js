@@ -23,7 +23,6 @@ export default defineConfig({
     rollupOptions: {
       output: {
         assetFileNames: "chat-widget.css",
-        // Ensure styles are inlined or properly namespaced
       },
       external: [],
     },
@@ -31,4 +30,5 @@ export default defineConfig({
   css: {
     postcss: './postcss.config.mjs',
   },
+  assetsInclude: ['**/*.css'],
 });
