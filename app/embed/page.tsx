@@ -13,6 +13,18 @@ import { ChatWidget } from "../components/ChatWidget";
     document.body.appendChild(rootDiv);
   }
 
-  const root = createRoot(rootDiv);
+  // Attach shadow DOM for style isolation
+  const shadow = rootDiv.attachShadow({ mode: 'open' });
+  
+  // Create wrapper for React
+  const wrapper = document.createElement('div');
+  shadow.appendChild(wrapper);
+  
+  // Inject styles into shadow DOM
+  const style = document.createElement('style');
+  style.textContent = require('./chat-widget.css?raw');
+  shadow.appendChild(style);
+
+  const root = createRoot(wrapper);
   root.render(<ChatWidget />);
 })();
