@@ -18,11 +18,11 @@ export default defineConfig({
       entry: "./app/embed/page.tsx",
       name: "ChatWidget",
       fileName: "chat-widget",
-      formats: ["es", "umd"],
+      formats: ["umd"],
     },
     rollupOptions: {
       output: {
-        assetFileNames: "chat-widget.css",
+        inlineDynamicImports: true,
       },
       external: [],
     },
@@ -30,5 +30,4 @@ export default defineConfig({
   css: {
     postcss: './postcss.config.mjs',
   },
-  assetsInclude: ['**/*.css'],
 });

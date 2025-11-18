@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import "tw-animate-css";
 
 /* Reset and base styles for shadow DOM isolation */
 :host {
