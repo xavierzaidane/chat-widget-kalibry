@@ -7,10 +7,10 @@
     @apply fixed bottom-6 right-6 z-[99999];
   }
 
-  /* Floating launcher button */
-  .chat-launcher {
-    @apply flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-tr from-zinc-700 to-zinc-900 text-white shadow-sm hover:scale-105 active:scale-95 transition-transform ring-1 ring-transparent hover:ring-zinc-300;
-  }
+  /* Floating launcher button */.chat-launcher {
+  @apply flex h-14 w-14 items-center justify-center rounded-full text-white shadow-sm hover:scale-105 active:scale-95 transition-transform ring-1 ring-transparent hover:ring-zinc-300;
+  background-color: #6C47FF;
+}
 
   /* Chat popup container */
   .chat-popup {
