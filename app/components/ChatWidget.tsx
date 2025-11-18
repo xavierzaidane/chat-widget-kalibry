@@ -108,22 +108,18 @@ export function ChatWidget() {
           <div className="kalibry-chat-header">
             <div className="kalibry-chat-header-brand">
               <div className="kalibry-chat-header-icon">
-                <img
-                  src="/Icon.svg"
-                  alt="Assistant"
-                  aria-hidden="true"
-                />
+                <img src="https://chat-widget-kalibry.vercel.app/Icon.svg" alt="Assistant" />
               </div>
               <div className="flex flex-col">
                 <span className="kalibry-chat-header-title">
                   Virtual Assistant
                 </span>
                 <div className="kalibry-chat-header-subtitle">
-                  <div className="flex items-center gap-2">
-                    <img src="/ellipse.svg" alt="Online status" />
-                    <span>Online</span>
-                  </div>
+                <div className="flex items-center gap-2">
+                  <span className="kalibry-online-indicator" />
+                  <span>Online</span>
                 </div>
+              </div>
               </div>
             </div>
             <div className="kalibry-chat-header-actions">

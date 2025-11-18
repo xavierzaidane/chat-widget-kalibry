@@ -10,20 +10,17 @@ export default defineConfig({
     },
   },
   define: {
-    'process.env': {} 
+    'process.env': {}
   },
   build: {
-    outDir: "dist",
-    lib: {
-      entry: "./app/embed/page.tsx",
-      name: "ChatWidget",
-      fileName: "chat-widget",
-      formats: ["es", "umd"],
-    },
-    rollupOptions: {
-      output: {
-        assetFileNames: "chat-widget.css",
-      },
-    },
+  outDir: "dist",
+  lib: {
+    entry: "./app/embed/page.tsx",
+    name: "ChatWidget",
+    fileName: "chat-widget",
+    formats: ["es", "umd"],
   },
+  cssCodeSplit: false,
+}
+
 });

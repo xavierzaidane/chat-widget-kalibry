@@ -67,7 +67,7 @@
   max-height: 86vh !important;
   border-radius: 0.5rem !important;
   background-color: var(--kalibry-bg-primary) !important;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15) !important;
   border: 1px solid var(--kalibry-border) !important;
   display: flex !important;
   flex-direction: column !important;
@@ -148,6 +148,23 @@
   color: #A48BFF !important;
 }
 
+.kalibry-online-indicator {
+  display: inline-block !important;
+  width: 0.5rem !important;
+  height: 0.5rem !important;
+  background-color: #10b981 !important;
+  border-radius: 9999px !important;
+  animation: kalibry-pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+}
+
+@keyframes kalibry-pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
 .kalibry-chat-header-button:hover {
   background-color: rgba(0, 0, 0, 0.05) !important;
   border-radius: 1rem !important;
@@ -293,6 +310,7 @@
   cursor: pointer !important;
   padding: 0 !important;
   flex-shrink: 0 !important;
+  color: #6C47FF !important;
 }
 
 .kalibry-chat-send-button:hover:not(:disabled) {
