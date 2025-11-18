@@ -1,7 +1,7 @@
 @import "tailwindcss";
 
-/* Reset and base styles for shadow DOM isolation */
-:host {
+/* CSS Variables */
+:root {
   --kalibry-primary: #6C47FF;
   --kalibry-primary-dark: #6B4EFF;
   --kalibry-primary-light: #A48CFF;
@@ -14,309 +14,307 @@
   --kalibry-bg-header: #EFE6FF;
 }
 
-@layer components {
-  /* Main chat widget container - scoped */
-  .kalibry-chat-widget-container {
-    position: fixed !important;
-    bottom: 1.5rem !important;
-    right: 1.5rem !important;
-    z-index: 99999 !important;
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
-    line-height: 1.5 !important;
-    color: var(--kalibry-text-primary) !important;
-    box-sizing: border-box !important;
-    isolation: isolate !important;
-    
-  }
-
-  /* Floating launcher button */
-  .kalibry-chat-launcher {
-    display: flex !important;
-    height: 4rem !important;
-    width: 4rem !important;
-    align-items: center !important;
-    justify-content: center !important;
-    border-radius: 9999px !important;
-    color: white !important;
-    background-color: #6C47FF!important;
-    border: none !important;
-    cursor: pointer !important;
-    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1) !important;
-    transition: all 0.2s ease !important;
-    ring: 1px !important;
-    ring-color: rgba(108, 71, 255, 0.35) !important;
-    outline: none !important;
-  }
-
-  .kalibry-chat-launcher:hover {
-    background-color: #5C3DF0 !important;
-    transform: scale(1.05) !important;
-  }
-
-  .kalibry-chat-launcher:active {
-    transform: scale(0.95) !important;
-  }
-
-  .kalibry-chat-launcher:focus {
-    outline: none !important;
-  }
-
-  /* Chat popup container */
-  .kalibry-chat-popup {
-    position: fixed !important;
-    bottom: 6rem !important;
-    right: 1.5rem !important;
-    width: 415px !important;
-    max-width: 92vw !important;
-    height: 620px !important;
-    max-height: 86vh !important;
-    border-radius: 0.5rem !important;
-    background-color: var(--kalibry-bg-primary) !important;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
-    border: 1px solid var(--kalibry-border) !important;
-    display: flex !important;
-    flex-direction: column !important;
-    overflow: hidden !important;
-    z-index: 999999 !important;
-    box-sizing: border-box !important;
-  }
-
-  /* Chat header */
-  .kalibry-chat-header {
-    flex: 0 0 auto !important;
-    display: flex !important;
-    align-items: stretch !important;
-    width: 100% !important;
-    justify-content: space-between !important;
-    background-color: #6C47FF1A !important;
-    padding: 1rem 1.5rem !important;
-    box-sizing: border-box !important;
-    border-radius: 0.5rem 0.5rem 0 0 !important;
-  }
-
-  /* Header brand section */
-  .kalibry-chat-header-brand {
-    display: flex !important;
-    align-items: center !important;
-    gap: 0.75rem !important;
-  }
-
-  /* Header icon container */
-  .kalibry-chat-header-icon {
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    height: 3rem !important;
-    width: 3rem !important;
-    border-radius: 1.5rem !important;
-    background-color: inherit !important;
-  }
-
-  .kalibry-chat-header-icon img {
-    width: 2.5rem !important;
-    height: 2.5rem !important;
-  }
-
-  /* Header text content */
-  .kalibry-chat-header-title {
-    font-size: 1.0625rem !important;
-    font-weight: 600 !important;
-    color: #4E32B5!important;
-    line-height: 1.2 !important;
-  }
-
-  .kalibry-chat-header-subtitle {
-    font-size: 0.875rem !important;
-    color: var(--kalibry-text-secondary) !important;
-    opacity: 0.6 !important;
-    font-weight: 600 !important;
-    margin-top: 0.25rem !important;
-  }
-
-  .kalibry-chat-header-subtitle img {
-    width: 0.5rem !important;
-    height: 0.5rem !important;
-  }
-
-  /* Header action buttons */
-  .kalibry-chat-header-actions {
-    display: flex !important;
-    align-items: center !important;
-    gap: 0.5rem !important;
-  }
-
-  .kalibry-chat-header-button {
-    padding: 0.5rem !important;
-    border-radius: 0.5rem !important;
-    background: transparent !important;
-    border: none !important;
-    cursor: pointer !important;
-    transition: background-color 0.2s !important;
-    color: #A48BFF !important;
-  }
-
-  .kalibry-chat-header-button:hover {
-    background-color: rgba(0, 0, 0, 0.05) !important;
-    border-radius: 1rem !important;
-  }
-
-  /* Messages container */
-  .kalibry-chat-messages-container {
-    flex: 1 !important;
-    overflow-y: auto !important;
-    padding: 1.5rem 1.25rem !important;
-    background-color: var(--kalibry-bg-primary) !important;
-    box-sizing: border-box !important;
-  }
-
-  /* Individual message wrapper */
-  .kalibry-chat-message-wrapper {
-    display: flex !important;
-    margin-bottom: 1.25rem !important;
-    box-sizing: border-box !important;
-  }
-
-  .kalibry-chat-message-user {
-    justify-content: flex-end !important;
-  }
-
-  .kalibry-chat-message-bot {
-    justify-content: flex-start !important;
-  }
-
-  /* Message bubble */
-  .kalibry-chat-message-bubble {
-    max-width: 75% !important;
-    padding: 0.5rem 1rem !important;
-    border-radius: 0.5rem !important;
-    font-size: 1rem !important;
-    line-height: 1.35 !important;
-    white-space: pre-line !important;
-    word-wrap: break-word !important;
-    box-sizing: border-box !important;
-  }
-
-  .kalibry-chat-message-user-bubble {
-    background-color: #6C47FF !important;
-    color: white !important;
-    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
-  }
-
-  .kalibry-chat-message-bot-bubble {
-    background-color: #F1F1F1 !important;
-    color: var(--kalibry-text-primary) !important;
-  }
-
-  /* Typing indicator */
-  .kalibry-chat-typing-indicator {
-    display: flex !important;
-    margin-top: 1.25rem !important;
-    justify-content: flex-start !important;
-    box-sizing: border-box !important;
-  }
-
-  .kalibry-chat-typing-bubble {
-    background-color: var(--kalibry-bg-secondary) !important;
-    border-radius: 1rem !important;
-    padding: 0.5rem 0.75rem !important;
-    display: flex !important;
-    align-items: center !important;
-    gap: 0.25rem !important;
-    max-width: 60% !important;
-  }
-
-  .kalibry-chat-typing-dot {
-    width: 0.5rem !important;
-    height: 0.5rem !important;
-    border-radius: 9999px !important;
-  }
-
-  .kalibry-chat-typing-dot-1 {
-    background-color: #A48CFF !important;
-    animation: kalibry-bounce 1s infinite -0.3s !important;
-  }
-
-  .kalibry-chat-typing-dot-2 {
-    background-color: #8C6BFF !important;
-    animation: kalibry-bounce 1s infinite -0.15s !important;
-  }
-
-  .kalibry-chat-typing-dot-3 {
-    background-color: #6B4EFF !important;
-    animation: kalibry-bounce 1s infinite !important;
-  }
-
-  /* Input area */
-  .kalibry-chat-input-area {
-    flex: 0 0 auto !important;
-    padding: 1.5rem !important;
-    background-color: var(--kalibry-bg-primary) !important;
-    box-sizing: border-box !important;
-  }
-
-  .kalibry-chat-input-container {
-    display: flex !important;
-    height: 3rem !important;
-    padding: 0 1rem !important;
-    border-radius: 0.75rem !important;
-    outline: 2px solid !important;
-    outline-color: #e2e8f0 !important;
-    outline-offset: -2px !important;
-    align-items: center !important;
-    gap: 0.75rem !important;
-    box-sizing: border-box !important;
-  }
-
-  .kalibry-chat-input-field {
-    flex: 1 !important;
-    background: transparent !important;
-    color: black !important;
-    font-size: 0.875rem !important;
-    border: none !important;
-    outline: none !important;
-    font-family: inherit !important;
-    box-sizing: border-box !important;
-  }
-
-  .kalibry-chat-input-field::placeholder {
-    opacity: 0.4 !important;
-    color: black !important;
-  }
-
-  .kalibry-chat-input-field:focus {
-    outline: none !important;
-  }
-
-  .kalibry-chat-send-button {
-    width: 1.5rem !important;
-    height: 1.5rem !important;
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-    color :#6C47FF !important;
-    border: none !important;
-    background: transparent !important;
-    cursor: pointer !important;
-    padding: 0 !important;
-    flex-shrink: 0 !important;
-  }
-
-  .kalibry-chat-send-button:disabled {
-    cursor: not-allowed !important;
-  }
-
-  .kalibry-chat-send-button svg {
-    width: 1.5rem !important;
-    height: 1.5rem !important;
-    fill: #6c47ff !important;
-  }
-
-  .kalibry-chat-send-button:disabled svg {
-    opacity: 0.4 !important;
-  }
+/* Main chat widget container */
+.kalibry-chat-widget-container {
+  position: fixed !important;
+  bottom: 1.5rem !important;
+  right: 1.5rem !important;
+  z-index: 99999 !important;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
+  line-height: 1.5 !important;
+  color: var(--kalibry-text-primary) !important;
+  box-sizing: border-box !important;
 }
 
-/* Custom animations */
+/* Floating launcher button */
+.kalibry-chat-launcher {
+  display: flex !important;
+  height: 4rem !important;
+  width: 4rem !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border-radius: 9999px !important;
+  color: white !important;
+  background-color: #6C47FF !important;
+  border: none !important;
+  cursor: pointer !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(108, 71, 255, 0.35) !important;
+  transition: all 0.2s ease !important;
+  outline: none !important;
+}
+
+.kalibry-chat-launcher:hover {
+  background-color: #5C3DF0 !important;
+  transform: scale(1.05) !important;
+}
+
+.kalibry-chat-launcher:active {
+  transform: scale(0.95) !important;
+}
+
+.kalibry-chat-launcher:focus {
+  outline: none !important;
+}
+
+/* Chat popup container */
+.kalibry-chat-popup {
+  position: fixed !important;
+  bottom: 6rem !important;
+  right: 1.5rem !important;
+  width: 415px !important;
+  max-width: 92vw !important;
+  height: 620px !important;
+  max-height: 86vh !important;
+  border-radius: 0.5rem !important;
+  background-color: var(--kalibry-bg-primary) !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15) !important;
+  border: 1px solid var(--kalibry-border) !important;
+  display: flex !important;
+  flex-direction: column !important;
+  overflow: hidden !important;
+  z-index: 999999 !important;
+  box-sizing: border-box !important;
+}
+
+/* Chat header */
+.kalibry-chat-header {
+  flex: 0 0 auto !important;
+  display: flex !important;
+  align-items: stretch !important;
+  width: 100% !important;
+  justify-content: space-between !important;
+  background-color: #EFE6FF !important;
+  padding: 1rem 1.5rem !important;
+  box-sizing: border-box !important;
+  border-radius: 0.5rem 0.5rem 0 0 !important;
+}
+
+.kalibry-chat-header-brand {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+}
+
+.kalibry-chat-header-icon {
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  height: 3rem !important;
+  width: 3rem !important;
+  border-radius: 1.5rem !important;
+  background-color: inherit !important;
+}
+
+.kalibry-chat-header-icon img {
+  width: 2.5rem !important;
+  height: 2.5rem !important;
+  display: block !important;
+}
+
+.kalibry-chat-header-title {
+  font-size: 1.0625rem !important;
+  font-weight: 600 !important;
+  color: #4E32B5 !important;
+  line-height: 1.2 !important;
+}
+
+.kalibry-chat-header-subtitle {
+  font-size: 0.875rem !important;
+  color: #4E32B5 !important;
+  opacity: 0.6 !important;
+  font-weight: 600 !important;
+  margin-top: 0.25rem !important;
+}
+
+.kalibry-chat-header-subtitle img {
+  width: 0.5rem !important;
+  height: 0.5rem !important;
+  display: inline-block !important;
+}
+
+.kalibry-chat-header-actions {
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+}
+
+.kalibry-chat-header-button {
+  padding: 0.5rem !important;
+  border-radius: 0.5rem !important;
+  background: transparent !important;
+  border: none !important;
+  cursor: pointer !important;
+  transition: background-color 0.2s !important;
+  color: #A48BFF !important;
+}
+
+.kalibry-chat-header-button:hover {
+  background-color: rgba(0, 0, 0, 0.05) !important;
+  border-radius: 1rem !important;
+}
+
+/* Messages container */
+.kalibry-chat-messages-container {
+  flex: 1 !important;
+  overflow-y: auto !important;
+  padding: 1.5rem 1.25rem !important;
+  background-color: var(--kalibry-bg-primary) !important;
+  box-sizing: border-box !important;
+}
+
+.kalibry-chat-message-wrapper {
+  display: flex !important;
+  margin-bottom: 1.25rem !important;
+  box-sizing: border-box !important;
+}
+
+.kalibry-chat-message-user {
+  justify-content: flex-end !important;
+}
+
+.kalibry-chat-message-bot {
+  justify-content: flex-start !important;
+}
+
+.kalibry-chat-message-bubble {
+  max-width: 75% !important;
+  padding: 0.5rem 1rem !important;
+  border-radius: 0.5rem !important;
+  font-size: 1rem !important;
+  line-height: 1.35 !important;
+  white-space: pre-line !important;
+  word-wrap: break-word !important;
+  box-sizing: border-box !important;
+  font-family: inherit !important;
+}
+
+.kalibry-chat-message-user-bubble {
+  background-color: #6C47FF !important;
+  color: white !important;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+}
+
+.kalibry-chat-message-bot-bubble {
+  background-color: #F1F1F1 !important;
+  color: var(--kalibry-text-primary) !important;
+}
+
+/* Typing indicator */
+.kalibry-chat-typing-indicator {
+  display: flex !important;
+  margin-top: 1.25rem !important;
+  justify-content: flex-start !important;
+  box-sizing: border-box !important;
+}
+
+.kalibry-chat-typing-bubble {
+  background-color: #F4F4F7 !important;
+  border-radius: 1rem !important;
+  padding: 0.5rem 0.75rem !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.25rem !important;
+  max-width: 60% !important;
+}
+
+.kalibry-chat-typing-dot {
+  width: 0.5rem !important;
+  height: 0.5rem !important;
+  border-radius: 9999px !important;
+  display: inline-block !important;
+}
+
+.kalibry-chat-typing-dot-1 {
+  background-color: #A48CFF !important;
+  animation: kalibry-bounce 1s infinite -0.3s !important;
+}
+
+.kalibry-chat-typing-dot-2 {
+  background-color: #8C6BFF !important;
+  animation: kalibry-bounce 1s infinite -0.15s !important;
+}
+
+.kalibry-chat-typing-dot-3 {
+  background-color: #6B4EFF !important;
+  animation: kalibry-bounce 1s infinite !important;
+}
+
+/* Input area */
+.kalibry-chat-input-area {
+  flex: 0 0 auto !important;
+  padding: 1.5rem !important;
+  background-color: var(--kalibry-bg-primary) !important;
+  box-sizing: border-box !important;
+}
+
+.kalibry-chat-input-container {
+  display: flex !important;
+  height: 3rem !important;
+  padding: 0 1rem !important;
+  border-radius: 0.75rem !important;
+  outline: 2px solid #e2e8f0 !important;
+  outline-offset: -2px !important;
+  align-items: center !important;
+  gap: 0.75rem !important;
+  box-sizing: border-box !important;
+  background-color: var(--kalibry-bg-primary) !important;
+}
+
+.kalibry-chat-input-field {
+  flex: 1 !important;
+  background: transparent !important;
+  color: black !important;
+  font-size: 0.875rem !important;
+  border: none !important;
+  outline: none !important;
+  font-family: inherit !important;
+  box-sizing: border-box !important;
+  width: 100% !important;
+  padding: 0 !important;
+}
+
+.kalibry-chat-input-field::placeholder {
+  opacity: 0.4 !important;
+  color: black !important;
+}
+
+.kalibry-chat-input-field:focus {
+  outline: none !important;
+}
+
+.kalibry-chat-send-button {
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  border: none !important;
+  background: transparent !important;
+  cursor: pointer !important;
+  padding: 0 !important;
+  flex-shrink: 0 !important;
+}
+
+.kalibry-chat-send-button:hover:not(:disabled) {
+  opacity: 0.8 !important;
+}
+
+.kalibry-chat-send-button:disabled {
+  cursor: not-allowed !important;
+}
+
+.kalibry-chat-send-button svg {
+  width: 1.5rem !important;
+  height: 1.5rem !important;
+  fill: #6c47ff !important;
+  display: block !important;
+}
+
+.kalibry-chat-send-button:disabled svg {
+  opacity: 0.4 !important;
+}
+
+/* Animations */
 @keyframes kalibry-bounce {
   0%, 100% {
     transform: translateY(0);
@@ -328,7 +326,7 @@
   }
 }
 
-/* Scrollbar styling for messages container */
+/* Scrollbar */
 .kalibry-chat-messages-container::-webkit-scrollbar {
   width: 4px !important;
 }
@@ -346,7 +344,7 @@
   background: #a1a1aa !important;
 }
 
-/* Responsive design */
+/* Responsive */
 @media (max-width: 640px) {
   .kalibry-chat-popup {
     right: 0.5rem !important;
@@ -363,7 +361,7 @@
 
 /* Dark mode support */
 @media (prefers-color-scheme: dark) {
-  :host {
+  :root {
     --kalibry-text-primary: #fafafa;
     --kalibry-text-secondary: #e0e0e0;
     --kalibry-border: #3f3f46;
