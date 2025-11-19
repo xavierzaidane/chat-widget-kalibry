@@ -1,40 +1,36 @@
-import { defineConfig } from "vite";
-import react from "@vitejs/plugin-react";
-import path from "path";
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import { resolve } from 'path'
 
 export default defineConfig({
   plugins: [react()],
-
-  resolve: {
-    alias: {
-      "@": path.resolve(__dirname, "./app"),
-    },
-  },
-
-  define: {
-    "process.env": {},
-  },
-
   build: {
-    outDir: "dist",
-
-    // Library mode (Shopify ScriptTag)
+    outDir: 'dist-embed',
     lib: {
-      entry: "./app/embed/page.tsx",
-      name: "ChatWidget",
-      fileName: "chat-widget",
-      formats: ["es", "umd"],
+      entry: resolve(__dirname, 'src/embed/page.tsx'),
+      name: 'ChatWidgetEmbed',
+      fileName: 'chat-widget-embed',
+      formats: ['iife']
     },
-
-    // ⛔ Default (false) — but we must set this TRUE if we want correct CSS bundling with rollup
-    cssCodeSplit: false,
-
-    // ⛔ Must disable asset file splitting to avoid missing files in Shopify
     rollupOptions: {
+      external: ['react', 'react-dom/client'],
       output: {
-        // required for Shopify: avoid broken asset paths
-        assetFileNames: "assets/[name].[ext]",
-      },
+        globals: {
+          'react': 'React',
+          'react-dom/client': 'ReactDOM'
+        },
+        inlineDynamicImports: true,
+      }
     },
+    minify: 'terser',
+    terserOptions: {
+      compress: {
+        drop_console: true,
+        drop_debugger: true
+      }
+    }
   },
-});
+  define: {
+    'process.env.NODE_ENV': JSON.stringify('production')
+  }
+})
