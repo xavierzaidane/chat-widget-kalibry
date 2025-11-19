@@ -13,18 +13,15 @@ export default defineConfig({
       formats: ['iife']
     },
     rollupOptions: {
-      // JANGAN external React - bundle semua dependencies
-      external: [],
+      external: [], 
       output: {
-        // Tidak perlu globals karena semua dibundle
         inlineDynamicImports: true,
       }
     },
     minify: 'terser',
     terserOptions: {
       compress: {
-        drop_console: true,
-        drop_debugger: true
+        drop_console: true
       }
     }
   },
