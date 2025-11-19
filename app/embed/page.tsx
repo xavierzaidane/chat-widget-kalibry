@@ -1,7 +1,7 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import "./chat-widget.css";
 import { ChatWidget } from "../components/ChatWidget";
+import widgetCSS from "./chat-widget.css?inline";
 
 (function () {
   const rootId = "kalibry-chat-widget-root";
@@ -13,6 +13,18 @@ import { ChatWidget } from "../components/ChatWidget";
     document.body.appendChild(rootDiv);
   }
 
-  const root = createRoot(rootDiv);
+  // Attach shadow root
+  const shadow = rootDiv.attachShadow({ mode: "open" });
+
+  // Inject CSS ke shadow tree
+  const style = document.createElement("style");
+  style.textContent = widgetCSS;
+  shadow.appendChild(style);
+
+  // Tempat React render
+  const app = document.createElement("div");
+  shadow.appendChild(app);
+
+  const root = createRoot(app);
   root.render(<ChatWidget />);
 })();
