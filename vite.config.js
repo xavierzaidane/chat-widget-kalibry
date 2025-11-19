@@ -7,7 +7,7 @@ export default defineConfig({
   build: {
     outDir: 'dist-embed',
     lib: {
-      entry: resolve(__dirname, 'src/embed/page.tsx'),
+      entry: resolve(__dirname, './app/embed/page.tsx'),
       name: 'ChatWidgetEmbed',
       fileName: 'chat-widget-embed',
       formats: ['iife']
