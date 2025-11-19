@@ -5,7 +5,7 @@ import { resolve } from 'path'
 export default defineConfig({
   plugins: [react()],
   build: {
-    outDir: 'dist-embed',
+    outDir: 'dist',
     lib: {
       entry: resolve(__dirname, './app/embed/page.tsx'),
       name: 'ChatWidgetEmbed',
