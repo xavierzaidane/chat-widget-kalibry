@@ -13,12 +13,10 @@ export default defineConfig({
       formats: ['iife']
     },
     rollupOptions: {
-      external: ['react', 'react-dom/client'],
+      // JANGAN external React - bundle semua dependencies
+      external: [],
       output: {
-        globals: {
-          'react': 'React',
-          'react-dom/client': 'ReactDOM'
-        },
+        // Tidak perlu globals karena semua dibundle
         inlineDynamicImports: true,
       }
     },
