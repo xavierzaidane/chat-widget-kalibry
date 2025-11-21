@@ -95,7 +95,10 @@ export function ChatWidget() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <img src="https://chat-widget-kalibry.vercel.app/message.svg" alt="Message" />
+            <img src="https://chat-widget-kalibry.vercel.app/message.svg" 
+            alt="Message"
+            style={{ width: '5rem', height: '5rem' }}
+            />
           </motion.span>
         </MorphingPopoverTrigger>
 
@@ -218,7 +221,7 @@ export function ChatWidget() {
                 aria-label="Send message"
                 className="kalibry-chat-send-button"
               >
-                <img src="https://chat-widget-kalibry.vercel.app/message.svg" alt="Assistant" />
+                <img src="https://chat-widget-kalibry.vercel.app/send.svg" alt="Assistant" />
               </button>
             </form>
           </div>
