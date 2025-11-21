@@ -1,6 +1,6 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import cssText from "./chat-widget.css?raw";
+import "./chat-widget.css";
 import { ChatWidget } from "../components/ChatWidget";
 
 (function () {
@@ -13,18 +13,6 @@ import { ChatWidget } from "../components/ChatWidget";
     document.body.appendChild(rootDiv);
   }
 
-  // Attach Shadow DOM for full style isolation
-  const shadow = rootDiv.attachShadow({ mode: "open" });
-
-  // Inject widget CSS into shadow root
-  const styleEl = document.createElement("style");
-  styleEl.textContent = cssText;
-  shadow.appendChild(styleEl);
-
-  // Create container inside shadow for React to mount
-  const wrapper = document.createElement("div");
-  shadow.appendChild(wrapper);
-
-  const root = createRoot(wrapper);
+  const root = createRoot(rootDiv);
   root.render(<ChatWidget />);
 })();
