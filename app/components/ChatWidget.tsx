@@ -95,7 +95,7 @@ export function ChatWidget() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <img src="https://chat-widget-kalibry.vercel.app/message.svg" 
+            <img src="https://chat-widget-kalibry.vercel.app/message.svg"
             alt="Message"
             style={{ width: '5rem', height: '5rem' }}
             />
@@ -131,7 +131,7 @@ export function ChatWidget() {
                 className="kalibry-chat-header-button"
                 aria-label="Close chat"
               >
-                <X size={22} />
+                <img src="https://chat-widget-kalibry.vercel.app/Icon.svg" alt="Assistant" />
               </button>
             </div>
           </div>
