@@ -131,7 +131,7 @@ export function ChatWidget() {
                 className="kalibry-chat-header-button"
                 aria-label="Close chat"
               >
-                <img src="https://chat-widget-kalibry.vercel.app/Icon.svg" alt="Assistant" />
+                <img src="https://chat-widget-kalibry.vercel.app/X.svg" alt="Assistant" />
               </button>
             </div>
           </div>
