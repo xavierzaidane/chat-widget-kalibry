@@ -2,8 +2,6 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
-const version = Date.now(); // timestamp versi otomatis
-
 export default defineConfig({
   plugins: [react()],
   resolve: {
@@ -22,13 +20,6 @@ export default defineConfig({
       fileName: "chat-widget",
       formats: ["es", "umd"],
     },
-    cssCodeSplit: false,
-  },
-
-  // ✨ inject versi ke output
-  esbuild: {
-    define: {
-      __WIDGET_VERSION__: JSON.stringify(version),
-    },
+    cssCodeSplit: true, // ✅ CSS terpisah
   },
 });
