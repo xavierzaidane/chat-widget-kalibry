@@ -311,7 +311,7 @@
 }
 
 .kalibry-chat-message-bot-bubble {
-  background-color: #F8FAFC !important;
+  background-color: #F1F1F1 !important;
   color: #334155 !important;
   border: 1px solid #F1F5F9 !important;
   border-bottom-left-radius: 1rem !important;
@@ -390,10 +390,6 @@
   box-sizing: border-box !important;
   background-color: #ffffff !important;
   transition: outline-color 0.2s ease !important;
-}
-
-.kalibry-chat-input-container:focus-within {
-  outline-color: #6C47FF !important;
 }
 
 .kalibry-chat-input-field {
