@@ -1,19 +1,112 @@
-@import "tailwindcss";
-/* CSS Variables */
-:root {
-  --kalibry-primary: #6C47FF;
-  --kalibry-primary-dark: #6B4EFF;
-  --kalibry-primary-light: #A48CFF;
-  --kalibry-primary-lighter: #8C6BFF;
-  --kalibry-text-primary: #171717;
-  --kalibry-text-secondary: #4E32B5;
-  --kalibry-border: #dedddd;
-  --kalibry-bg-primary: #ffffff;
-  --kalibry-bg-secondary: #F4F4F7;
-  --kalibry-bg-header: #EFE6FF;
+/* ===== RESET TOTAL UNTUK WIDGET ===== */
+.kalibry-chat-widget-container,
+.kalibry-chat-widget-container *,
+.kalibry-chat-widget-container *::before,
+.kalibry-chat-widget-container *::after {
+  all: unset;
+  box-sizing: border-box;
+  display: revert;
+  font-family: inherit;
+  font-size: inherit;
+  line-height: inherit;
+  color: inherit;
+  background: none;
+  border: none;
+  padding: 0;
+  margin: 0;
 }
 
-/* Main chat widget container */
+/* ===== UTILITY CLASSES ===== */
+.space-y-5 > * + * {
+  margin-top: 1.25rem !important;
+}
+
+.space-y-4 > * + * {
+  margin-top: 1rem !important;
+}
+
+.flex {
+  display: flex !important;
+}
+
+.flex-col {
+  flex-direction: column !important;
+}
+
+.items-center {
+  align-items: center !important;
+}
+
+.justify-center {
+  justify-content: center !important;
+}
+
+.gap-2 {
+  gap: 0.5rem !important;
+}
+
+.mb-2 {
+  margin-bottom: 0.5rem !important;
+}
+
+.max-w-\[75\%\] {
+  max-width: 75% !important;
+}
+
+.max-w-\[60\%\] {
+  max-width: 60% !important;
+}
+
+.h-4 {
+  height: 1rem !important;
+}
+
+.w-40 {
+  width: 10rem !important;
+}
+
+.w-48 {
+  width: 12rem !important;
+}
+
+.w-56 {
+  width: 14rem !important;
+}
+
+.w-64 {
+  width: 16rem !important;
+}
+
+.w-28 {
+  width: 7rem !important;
+}
+
+.bg-slate-200 {
+  background-color: #e2e8f0 !important;
+}
+
+.bg-slate-200\/80 {
+  background-color: rgba(226, 232, 240, 0.8) !important;
+}
+
+.rounded-md {
+  border-radius: 0.375rem !important;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.5;
+  }
+}
+
+.animate-pulse {
+  animation: pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite !important;
+}
+
+/* ===== STYLING UTAMA WIDGET ===== */
 .kalibry-chat-widget-container {
   position: fixed !important;
   bottom: 1.5rem !important;
@@ -21,11 +114,11 @@
   z-index: 99999 !important;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif !important;
   line-height: 1.5 !important;
-  color: var(--kalibry-text-primary) !important;
+  color: #333333 !important;
   box-sizing: border-box !important;
 }
 
-/* Floating launcher button */
+/* ===== LAUNCHER BUTTON ===== */
 .kalibry-chat-launcher {
   display: flex !important;
   height: 4rem !important;
@@ -37,9 +130,20 @@
   background-color: #6C47FF !important;
   border: none !important;
   cursor: pointer !important;
-  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), inset 0 0 0 1px rgba(108, 71, 255, 0.35) !important;
+  box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05) !important;
   transition: all 0.2s ease !important;
   outline: none !important;
+  position: relative !important;
+  z-index: 100000 !important;
+}
+
+.kalibry-chat-launcher svg {
+  display: block !important;
+  width: 1.875rem !important;
+  height: 1.875rem !important;
+  color: white !important;
+  fill: currentColor !important;
+  filter: drop-shadow(0 2px 6px rgba(0, 0, 0, 0.35)) !important;
 }
 
 .kalibry-chat-launcher:hover {
@@ -51,11 +155,7 @@
   transform: scale(0.95) !important;
 }
 
-.kalibry-chat-launcher:focus {
-  outline: none !important;
-}
-
-/* Chat popup container */
+/* ===== CHAT POPUP ===== */
 .kalibry-chat-popup {
   position: fixed !important;
   bottom: 6rem !important;
@@ -65,17 +165,17 @@
   height: 620px !important;
   max-height: 86vh !important;
   border-radius: 0.5rem !important;
-  background-color: var(--kalibry-bg-primary) !important;
-  box-shadow: 0 2px 3px rgba(0, 0, 0, 0.15) !important;
-  border: 1px solid var(--kalibry-border) !important;
+  background-color: #ffffff !important;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04) !important;
+  border: 1px solid #e5e7eb !important;
   display: flex !important;
   flex-direction: column !important;
   overflow: hidden !important;
-  z-index: 999999 !important;
   box-sizing: border-box !important;
+  z-index: 99999 !important;
 }
 
-/* Chat header */
+/* ===== HEADER ===== */
 .kalibry-chat-header {
   flex: 0 0 auto !important;
   display: flex !important;
@@ -115,6 +215,7 @@
   font-weight: 600 !important;
   color: #4E32B5 !important;
   line-height: 1.2 !important;
+  display: block !important;
 }
 
 .kalibry-chat-header-subtitle {
@@ -123,12 +224,9 @@
   opacity: 0.6 !important;
   font-weight: 600 !important;
   margin-top: 0.25rem !important;
-}
-
-.kalibry-chat-header-subtitle img {
-  width: 0.5rem !important;
-  height: 0.5rem !important;
-  display: inline-block !important;
+  display: flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
 }
 
 .kalibry-chat-header-actions {
@@ -145,6 +243,9 @@
   cursor: pointer !important;
   transition: background-color 0.2s !important;
   color: #A48BFF !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
 }
 
 .kalibry-online-indicator {
@@ -164,17 +265,17 @@
     opacity: 0.5;
   }
 }
+
 .kalibry-chat-header-button:hover {
   background-color: rgba(0, 0, 0, 0.05) !important;
-  border-radius: 1rem !important;
 }
 
-/* Messages container */
+/* ===== MESSAGES CONTAINER ===== */
 .kalibry-chat-messages-container {
   flex: 1 !important;
   overflow-y: auto !important;
   padding: 1.5rem 1.25rem !important;
-  background-color: var(--kalibry-bg-primary) !important;
+  background-color: #ffffff !important;
   box-sizing: border-box !important;
 }
 
@@ -194,10 +295,10 @@
 
 .kalibry-chat-message-bubble {
   max-width: 75% !important;
-  padding: 0.5rem 1rem !important;
-  border-radius: 0.5rem !important;
-  font-size: 1rem !important;
-  line-height: 1.35 !important;
+  padding: 0.75rem 1rem !important;
+  border-radius: 1rem !important;
+  font-size: 0.9375rem !important;
+  line-height: 1.4 !important;
   white-space: pre-line !important;
   word-wrap: break-word !important;
   box-sizing: border-box !important;
@@ -208,14 +309,17 @@
   background-color: #6C47FF !important;
   color: white !important;
   box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05) !important;
+  border-bottom-right-radius: 0.25rem !important;
 }
 
 .kalibry-chat-message-bot-bubble {
-  background-color: #F1F1F1 !important;
-  color: var(--kalibry-text-primary) !important;
+  background-color: #F8FAFC !important;
+  color: #334155 !important;
+  border: 1px solid #F1F5F9 !important;
+  border-bottom-left-radius: 0.25rem !important;
 }
 
-/* Typing indicator */
+/* ===== TYPING INDICATOR ===== */
 .kalibry-chat-typing-indicator {
   display: flex !important;
   margin-top: 1.25rem !important;
@@ -224,13 +328,14 @@
 }
 
 .kalibry-chat-typing-bubble {
-  background-color: #F4F4F7 !important;
+  background-color: #F8FAFC !important;
   border-radius: 1rem !important;
-  padding: 0.5rem 0.75rem !important;
+  padding: 0.75rem 1rem !important;
   display: flex !important;
   align-items: center !important;
-  gap: 0.25rem !important;
+  gap: 0.375rem !important;
   max-width: 60% !important;
+  border: 1px solid #F1F5F9 !important;
 }
 
 .kalibry-chat-typing-dot {
@@ -255,12 +360,24 @@
   animation: kalibry-bounce 1s infinite !important;
 }
 
-/* Input area */
+@keyframes kalibry-bounce {
+  0%, 100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  50% {
+    transform: translateY(-0.25rem);
+    opacity: 0.7;
+  }
+}
+
+/* ===== INPUT AREA ===== */
 .kalibry-chat-input-area {
   flex: 0 0 auto !important;
   padding: 1.5rem !important;
-  background-color: var(--kalibry-bg-primary) !important;
+  background-color: #ffffff !important;
   box-sizing: border-box !important;
+  border-top: 1px solid #F1F5F9 !important;
 }
 
 .kalibry-chat-input-container {
@@ -273,13 +390,18 @@
   align-items: center !important;
   gap: 0.75rem !important;
   box-sizing: border-box !important;
-  background-color: var(--kalibry-bg-primary) !important;
+  background-color: #ffffff !important;
+  transition: outline-color 0.2s ease !important;
+}
+
+.kalibry-chat-input-container:focus-within {
+  outline-color: #6C47FF !important;
 }
 
 .kalibry-chat-input-field {
   flex: 1 !important;
   background: transparent !important;
-  color: black !important;
+  color: #1a202c !important;
   font-size: 0.875rem !important;
   border: none !important;
   outline: none !important;
@@ -291,11 +413,7 @@
 
 .kalibry-chat-input-field::placeholder {
   opacity: 0.4 !important;
-  color: black !important;
-}
-
-.kalibry-chat-input-field:focus {
-  outline: none !important;
+  color: #6b7280 !important;
 }
 
 .kalibry-chat-send-button {
@@ -310,6 +428,7 @@
   padding: 0 !important;
   flex-shrink: 0 !important;
   color: #6C47FF !important;
+  transition: opacity 0.2s ease !important;
 }
 
 .kalibry-chat-send-button:hover:not(:disabled) {
@@ -318,32 +437,17 @@
 
 .kalibry-chat-send-button:disabled {
   cursor: not-allowed !important;
+  opacity: 0.4 !important;
 }
 
 .kalibry-chat-send-button svg {
   width: 1.5rem !important;
   height: 1.5rem !important;
-  fill: #6c47ff !important;
+  fill: currentColor !important;
   display: block !important;
 }
 
-.kalibry-chat-send-button:disabled svg {
-  opacity: 0.4 !important;
-}
-
-/* Animations */
-@keyframes kalibry-bounce {
-  0%, 100% {
-    transform: translateY(0);
-    opacity: 1;
-  }
-  50% {
-    transform: translateY(-0.5rem);
-    opacity: 0.7;
-  }
-}
-
-/* Scrollbar */
+/* ===== SCROLLBAR ===== */
 .kalibry-chat-messages-container::-webkit-scrollbar {
   width: 4px !important;
 }
@@ -361,11 +465,14 @@
   background: #a1a1aa !important;
 }
 
-/* Responsive */
+/* ===== RESPONSIVE ===== */
 @media (max-width: 640px) {
-  .kalibry-chat-popup {
+  .kalibry-chat-widget-container {
     right: 0.5rem !important;
-    bottom: 5rem !important;
+    bottom: 0.5rem !important;
+  }
+  
+  .kalibry-chat-popup {
     width: calc(100vw - 1rem) !important;
     max-width: calc(100vw - 1rem) !important;
     height: 80vh !important;
@@ -376,14 +483,38 @@
   }
 }
 
-/* Dark mode support */
+/* ===== DARK MODE SUPPORT ===== */
 @media (prefers-color-scheme: dark) {
-  :root {
-    --kalibry-text-primary: #fafafa;
-    --kalibry-text-secondary: #e0e0e0;
-    --kalibry-border: #3f3f46;
-    --kalibry-bg-primary: #18181b;
-    --kalibry-bg-secondary: #27272a;
-    --kalibry-bg-header: #2a2a2a;
+  .kalibry-chat-popup {
+    background-color: #18181b !important;
+    border-color: #3f3f46 !important;
+  }
+  
+  .kalibry-chat-messages-container {
+    background-color: #18181b !important;
+  }
+  
+  .kalibry-chat-message-bot-bubble {
+    background-color: #27272a !important;
+    color: #fafafa !important;
+    border-color: #3f3f46 !important;
+  }
+  
+  .kalibry-chat-input-area {
+    background-color: #18181b !important;
+    border-top-color: #3f3f46 !important;
+  }
+  
+  .kalibry-chat-input-container {
+    background-color: #27272a !important;
+    outline-color: #3f3f46 !important;
+  }
+  
+  .kalibry-chat-input-field {
+    color: #fafafa !important;
+  }
+  
+  .kalibry-chat-input-field::placeholder {
+    color: #a1a1aa !important;
   }
 }

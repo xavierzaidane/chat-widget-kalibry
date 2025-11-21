@@ -95,7 +95,7 @@ export function ChatWidget() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <MessageCircleMore size={30} className="text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]" />
+            <MessageCircleMore size={30} className=".kalibry-chat-launcher svg" />
           </motion.span>
         </MorphingPopoverTrigger>
 
