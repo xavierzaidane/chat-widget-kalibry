@@ -387,3 +387,68 @@
     --kalibry-bg-header: #2a2a2a;
   }
 }
+
+/* launcher inner */
+.kalibry-launcher-inner {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.kalibry-launcher-icon {
+  color: #fff;
+  filter: drop-shadow(0 2px 6px rgba(0,0,0,0.35));
+}
+
+/* header text layout */
+.kalibry-header-text {
+  display: flex;
+  flex-direction: column;
+  margin-left: 0.75rem;
+}
+
+/* online row */
+.kalibry-online-row {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.kalibry-online-label {
+  font-size: 0.875rem;
+  color: var(--kalibry-text-secondary);
+  font-weight: 600;
+}
+
+/* loading skeleton */
+.kalibry-loading {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  padding: 0.25rem 0;
+}
+.kalibry-placeholder {
+  display: flex;
+  gap: 0.5rem;
+}
+.kalibry-placeholder.left { justify-content: flex-start; }
+.kalibry-placeholder.right { justify-content: flex-end; }
+.kalibry-placeholder-line {
+  background: #e9e9ef;
+  border-radius: 6px;
+  height: 0.875rem;
+  display: block;
+}
+.kalibry-placeholder-line.short { width: 8rem; }
+.kalibry-placeholder-line.med { width: 12rem; }
+.kalibry-placeholder-line.long { width: 14rem; }
+
+/* messages list spacing */
+.kalibry-messages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  padding-bottom: 0.25rem;
+}
+
+/* keep existing rules intact */

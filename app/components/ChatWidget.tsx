@@ -34,7 +34,7 @@ export function ChatWidget() {
     if (open) {
       setLoading(true);
       const focusT = setTimeout(() => inputRef.current?.focus(), 180);
-      const loadT = setTimeout(() => setLoading(false), 600); 
+      const loadT = setTimeout(() => setLoading(false), 600);
       return () => {
         clearTimeout(focusT);
         clearTimeout(loadT);
@@ -80,7 +80,7 @@ export function ChatWidget() {
   return (
     <div className="kalibry-chat-widget-container">
       <MorphingPopover
-        transition={{ type: 'spring', bounce: 0.35, duration: 0.50 }}
+        transition={{ type: 'spring', bounce: 0.35, duration: 0.5 }}
         open={open}
         onOpenChange={setOpen}
       >
@@ -89,14 +89,9 @@ export function ChatWidget() {
           className="kalibry-chat-launcher"
           aria-label="Open Kalibry Assistant"
         >
-          <motion.span
-            layoutId={`label-${id}`}
-            className="flex items-center justify-center"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.95 }}
-          >
-            <MessageCircleMore size={30} className="text-white drop-shadow-[0_2px_6px_rgba(0,0,0,0.35)]" />
-          </motion.span>
+          <span className="kalibry-launcher-inner" aria-hidden="true">
+            <MessageCircleMore size={30} className="kalibry-launcher-icon" />
+          </span>
         </MorphingPopoverTrigger>
 
         {/* Popup */}
@@ -104,24 +99,25 @@ export function ChatWidget() {
           className="kalibry-chat-popup"
           aria-label="Chat support window"
         >
-          {/* ================= HEADER ================= */}
+          {/* HEADER */}
           <div className="kalibry-chat-header">
             <div className="kalibry-chat-header-brand">
               <div className="kalibry-chat-header-icon">
                 <img src="https://chat-widget-kalibry.vercel.app/Icon.svg" alt="Assistant" />
               </div>
-              <div className="flex flex-col">
-                <span className="kalibry-chat-header-title">
-                  Virtual Assistant
-                </span>
+
+              <div className="kalibry-header-text">
+                <span className="kalibry-chat-header-title">Virtual Assistant</span>
+
                 <div className="kalibry-chat-header-subtitle">
-                <div className="flex items-center gap-2">
-                  <span className="kalibry-online-indicator" />
-                  <span>Online</span>
+                  <div className="kalibry-online-row">
+                    <span className="kalibry-online-indicator" />
+                    <span className="kalibry-online-label">Online</span>
+                  </div>
                 </div>
               </div>
-              </div>
             </div>
+
             <div className="kalibry-chat-header-actions">
               <button
                 onClick={() => setOpen(false)}
@@ -133,31 +129,25 @@ export function ChatWidget() {
             </div>
           </div>
 
-          {/* ================= CHAT MESSAGES ================= */}
+          {/* MESSAGES */}
           <div className="kalibry-chat-messages-container">
             {loading ? (
-              <div className="space-y-4 animate-pulse">
-                <div className="flex justify-start">
-                  <div className="max-w-[75%]">
-                    <div className="h-4 w-40 bg-slate-200 rounded-md mb-2" />
-                    <div className="h-4 w-64 bg-slate-200 rounded-md" />
-                  </div>
+              <div className="kalibry-loading">
+                <div className="kalibry-placeholder left">
+                  <div className="kalibry-placeholder-line short" />
+                  <div className="kalibry-placeholder-line long" />
                 </div>
-                <div className="flex justify-end">
-                  <div className="max-w-[75%]">
-                    <div className="h-4 w-48 bg-slate-200/80 rounded-md mb-2" />
-                  </div>
+                <div className="kalibry-placeholder right">
+                  <div className="kalibry-placeholder-line med" />
                 </div>
-                <div className="flex justify-start">
-                  <div className="max-w-[75%]">
-                    <div className="h-4 w-56 bg-slate-200 rounded-md mb-2" />
-                    <div className="h-4 w-28 bg-slate-200 rounded-md" />
-                  </div>
+                <div className="kalibry-placeholder left">
+                  <div className="kalibry-placeholder-line long" />
+                  <div className="kalibry-placeholder-line short" />
                 </div>
               </div>
             ) : (
               <>
-                <div className="space-y-5">
+                <div className="kalibry-messages-list">
                   {messages.map((m, i) => (
                     <motion.div
                       key={i}
@@ -179,7 +169,6 @@ export function ChatWidget() {
                   ))}
                 </div>
 
-                {/* Typing Indicator */}
                 {botTyping && (
                   <div className="kalibry-chat-typing-indicator">
                     <div className="kalibry-chat-typing-bubble">
@@ -195,7 +184,7 @@ export function ChatWidget() {
             <div ref={endRef} />
           </div>
 
-          {/* ================= INPUT BOX ================= */}
+          {/* INPUT */}
           <div className="kalibry-chat-input-area">
             <form
               onSubmit={(e) => {
@@ -218,19 +207,10 @@ export function ChatWidget() {
                 aria-label="Send message"
                 className="kalibry-chat-send-button"
               >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  viewBox="0 0 24 24"
-                  width="24"
-                  height="24"
-                  fill="#6c47ff"
-                  aria-hidden="true"
-                >
+                {/* inline svg kept */}
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" width="24" height="24" fill="#6c47ff" aria-hidden="true">
                   <g clipPath="url(#clip0_4418_8610)">
-                    <path
-                      d="M16.1401 2.95907L7.11012 5.95907C1.04012 7.98907 1.04012 11.2991 7.11012 13.3191L9.79012 14.2091L10.6801 16.8891C12.7001 22.9591 16.0201 22.9591 18.0401 16.8891L21.0501 7.86907C22.3901 3.81907 20.1901 1.60907 16.1401 2.95907ZM16.4601 8.33907L12.6601 12.1591C12.5101 12.3091 12.3201 12.3791 12.1301 12.3791C11.9401 12.3791 11.7501 12.3091 11.6001 12.1591C11.3101 11.8691 11.3101 11.3891 11.6001 11.0991L15.4001 7.27907C15.6901 6.98907 16.1701 6.98907 16.4601 7.27907C16.7501 7.56907 16.7501 8.04907 16.4601 8.33907Z"
-                      fill="currentColor"
-                    />
+                    <path d="M16.1401 2.95907L7.11012 5.95907C1.04012 7.98907 1.04012 11.2991 7.11012 13.3191L9.79012 14.2091L10.6801 16.8891C12.7001 22.9591 16.0201 22.9591 18.0401 16.8891L21.0501 7.86907C22.3901 3.81907 20.1901 1.60907 16.1401 2.95907ZM16.4601 8.33907L12.6601 12.1591C12.5101 12.3091 12.3201 12.3791 12.1301 12.3791C11.9401 12.3791 11.7501 12.3091 11.6001 12.1591C11.3101 11.8691 11.3101 11.3891 11.6001 11.0991L15.4001 7.27907C15.6901 6.98907 16.1701 6.98907 16.4601 7.27907C16.7501 7.56907 16.7501 8.04907 16.4601 8.33907Z" fill="currentColor" />
                   </g>
                   <defs>
                     <clipPath id="clip0_4418_8610">
