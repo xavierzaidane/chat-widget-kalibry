@@ -85,7 +85,7 @@ export function ChatWidget() {
         onOpenChange={setOpen}
       >
         {/* Launcher */}
-        <MorphingPopoverTrigger
+              <MorphingPopoverTrigger
           className="kalibry-chat-launcher"
           aria-label="Open Kalibry Assistant"
         >
@@ -95,7 +95,7 @@ export function ChatWidget() {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
           >
-            <MessageCircleMore size={30} className=".kalibry-chat-launcher svg" />
+            <img src="https://chat-widget-kalibry.vercel.app/message.svg" alt="Assistant" />
           </motion.span>
         </MorphingPopoverTrigger>
 
@@ -223,20 +223,13 @@ export function ChatWidget() {
                   viewBox="0 0 24 24"
                   width="24"
                   height="24"
-                  fill="#6c47ff"
+                  fill="currentColor"
                   aria-hidden="true"
+                  style={{ display: 'block', overflow: 'visible' }}
                 >
-                  <g clipPath="url(#clip0_4418_8610)">
-                    <path
-                      d="M16.1401 2.95907L7.11012 5.95907C1.04012 7.98907 1.04012 11.2991 7.11012 13.3191L9.79012 14.2091L10.6801 16.8891C12.7001 22.9591 16.0201 22.9591 18.0401 16.8891L21.0501 7.86907C22.3901 3.81907 20.1901 1.60907 16.1401 2.95907ZM16.4601 8.33907L12.6601 12.1591C12.5101 12.3091 12.3201 12.3791 12.1301 12.3791C11.9401 12.3791 11.7501 12.3091 11.6001 12.1591C11.3101 11.8691 11.3101 11.3891 11.6001 11.0991L15.4001 7.27907C15.6901 6.98907 16.1701 6.98907 16.4601 7.27907C16.7501 7.56907 16.7501 8.04907 16.4601 8.33907Z"
-                      fill="currentColor"
-                    />
-                  </g>
-                  <defs>
-                    <clipPath id="clip0_4418_8610">
-                      <rect width="24" height="24" fill="white" />
-                    </clipPath>
-                  </defs>
+                  <path
+                    d="M16.1401 2.95907L7.11012 5.95907C1.04012 7.98907 1.04012 11.2991 7.11012 13.3191L9.79012 14.2091L10.6801 16.8891C12.7001 22.9591 16.0201 22.9591 18.0401 16.8891L21.0501 7.86907C22.3901 3.81907 20.1901 1.60907 16.1401 2.95907ZM16.4601 8.33907L12.6601 12.1591C12.5101 12.3091 12.3201 12.3791 12.1301 12.3791C11.9401 12.3791 11.7501 12.3091 11.6001 12.1591C11.3101 11.8691 11.3101 11.3891 11.6001 11.0991L15.4001 7.27907C15.6901 6.98907 16.1701 6.98907 16.4601 7.27907C16.7501 7.56907 16.7501 8.04907 16.4601 8.33907Z"
+                  />
                 </svg>
               </button>
             </form>

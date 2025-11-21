@@ -445,6 +445,12 @@
   height: 1.5rem !important;
   fill: currentColor !important;
   display: block !important;
+  stroke: none !important;
+  overflow: visible !important;
+}
+
+.kalibry-chat-send-button:disabled svg {
+  opacity: 0.4 !important;
 }
 
 /* ===== SCROLLBAR ===== */
