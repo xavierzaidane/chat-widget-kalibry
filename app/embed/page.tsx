@@ -1,18 +1,27 @@
 import React from "react";
 import { createRoot } from "react-dom/client";
-import "./chat-widget.css";
 import { ChatWidget } from "../components/ChatWidget";
+import styles from "./chat-widget.css?inline";
 
 (function () {
   const rootId = "kalibry-chat-widget-root";
-  let rootDiv = document.getElementById(rootId);
+  let container = document.getElementById(rootId);
 
-  if (!rootDiv) {
-    rootDiv = document.createElement("div");
-    rootDiv.id = rootId;
-    document.body.appendChild(rootDiv);
+  if (!container) {
+    container = document.createElement("div");
+    container.id = rootId;
+    document.body.appendChild(container);
   }
 
-  const root = createRoot(rootDiv);
+  const shadow = container.attachShadow({ mode: "open" });
+
+  const styleTag = document.createElement("style");
+  styleTag.textContent = styles; // Tailwind v4 + custom CSS
+  shadow.appendChild(styleTag);
+
+  const mountEl = document.createElement("div");
+  shadow.appendChild(mountEl);
+
+  const root = createRoot(mountEl);
   root.render(<ChatWidget />);
 })();

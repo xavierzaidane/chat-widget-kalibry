@@ -2,6 +2,8 @@ import { defineConfig } from "vite";
 import react from "@vitejs/plugin-react";
 import path from "path";
 
+const version = Date.now(); // timestamp versi otomatis
+
 export default defineConfig({
   plugins: [react()],
   resolve: {
@@ -10,17 +12,23 @@ export default defineConfig({
     },
   },
   define: {
-    'process.env': {} 
+    "process.env": {},
   },
   build: {
-  outDir: "dist",
-  lib: {
-    entry: "./app/embed/page.tsx",
-    name: "ChatWidget",
-    fileName: "chat-widget",
-    formats: ["es", "umd"],
+    outDir: "dist",
+    lib: {
+      entry: "./app/embed/page.tsx",
+      name: "ChatWidget",
+      fileName: "chat-widget",
+      formats: ["es", "umd"],
+    },
+    cssCodeSplit: false,
   },
-  cssCodeSplit: false, // <-- This will inline all CSS into JS
-}
 
+  // ✨ inject versi ke output
+  esbuild: {
+    define: {
+      __WIDGET_VERSION__: JSON.stringify(version),
+    },
+  },
 });
