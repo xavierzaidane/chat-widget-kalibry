@@ -20,6 +20,6 @@ export default defineConfig({
       fileName: "chat-widget",
       formats: ["es", "umd"],
     },
-    cssCodeSplit: true, // ✅ CSS terpisah
+    cssCodeSplit: false,
   },
 });
