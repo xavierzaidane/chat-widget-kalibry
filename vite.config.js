@@ -9,28 +9,19 @@ export default defineConfig({
       "@": path.resolve(__dirname, "./app"),
     },
   },
-  define: {
-    "process.env": {},
-  },
-  publicDir: "public",
   build: {
     outDir: "dist",
-    cssCodeSplit: false, // single CSS output
     lib: {
-      entry: "./app/embed/page.tsx",
+      entry: "./app/embed/page.tsx",  // file entry point widget
       name: "ChatWidget",
-      formats: ["es", "umd"],
-      fileName: (format) => (format === 'es' ? 'chat-widget.mjs' : 'chat-widget.umd.js'),
+      fileName: "chat-widget",
+      formats: ["es", "umd"],         // ES module + UMD
     },
-    rollupOptions: {
-      output: {
-        // ensure CSS ends up as chat-widget.css
-        assetFileNames: (assetInfo) => {
-          if (assetInfo.name && assetInfo.name.endsWith('.css')) return 'chat-widget.css';
-          return assetInfo.name || '[name][extname]';
-        },
-        inlineDynamicImports: true,
-      }
-    }
-  }
+    cssCodeSplit: false,             // CSS dijadikan satu file
+    minify: "esbuild",               // minify untuk kecilkan bundle
+    sourcemap: false,                // optional: matikan source map
+  },
+  define: {
+    "process.env": {},                // untuk menghindari error env di browser
+  },
 });
