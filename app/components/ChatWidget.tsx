@@ -2,8 +2,9 @@
 
 import { motion } from 'motion/react';
 import { useId, useState, useRef, useEffect } from 'react';
-import { X, MessageCircleMore } from 'lucide-react';
 import { MorphingPopover, MorphingPopoverContent, MorphingPopoverTrigger } from './ui/morphing-popover';
+import { callChatAPI } from './api/route';
+import ReactMarkdown from 'react-markdown';
 
 interface Message {
   role: 'user' | 'bot';
@@ -17,7 +18,9 @@ export function ChatWidget() {
   const [messages, setMessages] = useState<Message[]>([
     {
       role: 'bot',
-      text: "Hi there, I'm Kalibry Assistant. I'll respond clearly and fast."
+      text: `Hi! I'm Kalibry, the Purple Box AI Support Chatbot 👋
+
+Ask me anything the more descriptive, the better I can help!`
     }
   ]);
   const [botTyping, setBotTyping] = useState(false);
@@ -67,25 +70,43 @@ export function ChatWidget() {
 
   const sendMessage = async () => {
     if (!input.trim()) return;
+
     const userMessage: Message = { role: 'user', text: input.trim() };
     setMessages((prev) => [...prev, userMessage]);
     setInput('');
 
-    const botText =
-      "I'm here to help you with any questions or information you need. How can I assist you today?";
-
-    await streamBotReply(botText);
+    try {
+      setBotTyping(true);
+      const reply = await callChatAPI([...messages, userMessage]);
+      
+      const botText = typeof reply === 'string' ? reply : JSON.stringify(reply);
+      await streamBotReply(botText);
+    } catch (err) {
+      console.error('Failed to send message:', err);
+      setMessages((prev) => [...prev, { 
+        role: 'bot', 
+        text: 'Sorry, something went wrong. Please try again.' 
+      }]);
+    } finally {
+      setBotTyping(false);
+    }
   };
+
 
   return (
     <div className="kalibry-chat-widget-container">
       <MorphingPopover
         transition={{ type: 'spring', bounce: 0.35, duration: 0.50 }}
         open={open}
-        onOpenChange={setOpen}
+        onOpenChange={(newOpen) => {
+          if (newOpen === false && open === true) {
+            return;
+          }
+          setOpen(newOpen);
+        }}
       >
         {/* Launcher */}
-              <MorphingPopoverTrigger
+        <MorphingPopoverTrigger
           className="kalibry-chat-launcher"
           aria-label="Open Kalibry Assistant"
         >
@@ -176,7 +197,7 @@ export function ChatWidget() {
                             : 'kalibry-chat-message-bot-bubble'
                         }`}
                       >
-                        {m.text}
+                        <ReactMarkdown>{m.text}</ReactMarkdown>
                       </div>
                     </motion.div>
                   ))}
@@ -213,11 +234,12 @@ export function ChatWidget() {
                 onChange={(e) => setInput(e.target.value)}
                 placeholder="Type a message"
                 className="kalibry-chat-input-field"
+                disabled={botTyping}
               />
 
               <button
                 type="submit"
-                disabled={!input.trim()}
+                disabled={!input.trim() || botTyping}
                 aria-label="Send message"
                 className="kalibry-chat-send-button"
               >
