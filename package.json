@@ -6,7 +6,8 @@
     "dev": "next",
     "build": "vite build",
     "postbuild": "node scripts/prefix-css.js",
-    "lint": "eslint"
+    "lint": "eslint",
+    "cypress:open": "cypress open"
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.2.4",
@@ -27,6 +28,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "@vitejs/plugin-react": "^5.1.0",
+    "cypress": "^15.10.0",
     "eslint": "^9",
     "eslint-config-next": "16.0.1",
     "postcss": "^8.5.6",
